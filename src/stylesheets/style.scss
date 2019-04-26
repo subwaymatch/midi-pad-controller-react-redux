@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  background-color: #111;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+}
+
+html,
+body,
+#root,
+#app-wrapper {
+  height: 100%;
+}
+
+#app-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
