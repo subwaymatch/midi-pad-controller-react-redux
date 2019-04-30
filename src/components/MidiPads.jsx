@@ -35,6 +35,11 @@ class MidiPads extends Component {
 
     console.log("playSound, audio=" + audio);
 
+    if (!audio.ended) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+
     audio.play();
   }
 

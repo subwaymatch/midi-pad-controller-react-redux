@@ -1,6 +1,6 @@
 [
   {
-    "display": "A reallllly long name Hi-Hat",
+    "display": "Hi-Hat",
     "srcName": "Hihat Acoustic01",
     "keyboard": "1",
     "volume": 1,
@@ -22,7 +22,7 @@
   },
   {
     "display": "Ride",
-    "srcName": "Ride Acoustic 02",
+    "srcName": "Ride Acoustic02",
     "keyboard": "4",
     "volume": 1,
     "color": "turquoise"
@@ -80,7 +80,7 @@
   },
   {
     "display": "Kick",
-    "srcName": "Kick Electro",
+    "srcName": "Kick Electro01",
     "keyboard": "f",
     "volume": 1,
     "color": "turquoise"
