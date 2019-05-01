@@ -2,28 +2,28 @@
   {
     "display": "Hi-Hat",
     "srcName": "Hihat Acoustic01",
-    "keyboard": "1",
+    "shortcutKey": "1",
     "volume": 1,
     "color": "blue"
   },
   {
     "display": "Hi-Hat",
     "srcName": "Hihat Acoustic02",
-    "keyboard": "2",
+    "shortcutKey": "2",
     "volume": 1,
     "color": "orange"
   },
   {
     "display": "Ride",
     "srcName": "Ride Acoustic01",
-    "keyboard": "3",
+    "shortcutKey": "3",
     "volume": 1,
     "color": "yellow"
   },
   {
     "display": "Ride",
     "srcName": "Ride Acoustic02",
-    "keyboard": "4",
+    "shortcutKey": "4",
     "volume": 1,
     "color": "turquoise"
   },
@@ -31,28 +31,28 @@
   {
     "display": "Snare",
     "srcName": "Snare Acoustic01",
-    "keyboard": "q",
+    "shortcutKey": "q",
     "volume": 1,
     "color": "blue"
   },
   {
     "display": "Snare",
     "srcName": "Snare Acoustic02",
-    "keyboard": "w",
+    "shortcutKey": "w",
     "volume": 1,
     "color": "orange"
   },
   {
     "display": "Clap",
     "srcName": "Clap Analog",
-    "keyboard": "e",
+    "shortcutKey": "e",
     "volume": 1,
     "color": "yellow"
   },
   {
     "display": "Clap",
     "srcName": "Clap 808",
-    "keyboard": "r",
+    "shortcutKey": "r",
     "volume": 1,
     "color": "turquoise"
   },
@@ -60,28 +60,28 @@
   {
     "display": "Kick",
     "srcName": "Kick Acoustic01",
-    "keyboard": "a",
+    "shortcutKey": "a",
     "volume": 1,
     "color": "blue"
   },
   {
     "display": "Kick",
     "srcName": "Kick Acoustic02",
-    "keyboard": "s",
+    "shortcutKey": "s",
     "volume": 1,
     "color": "orange"
   },
   {
     "display": "Kick",
     "srcName": "Kick Classic",
-    "keyboard": "d",
+    "shortcutKey": "d",
     "volume": 1,
     "color": "yellow"
   },
   {
     "display": "Kick",
     "srcName": "Kick Electro01",
-    "keyboard": "f",
+    "shortcutKey": "f",
     "volume": 1,
     "color": "turquoise"
   },
@@ -89,28 +89,28 @@
   {
     "display": "Perc",
     "srcName": "Perc 808",
-    "keyboard": "z",
+    "shortcutKey": "z",
     "volume": 1,
     "color": "blue"
   },
   {
     "display": "Tambo",
     "srcName": "Perc Tambo",
-    "keyboard": "x",
+    "shortcutKey": "x",
     "volume": 1,
     "color": "orange"
   },
   {
     "display": "Tribal",
     "srcName": "Perc Tribal",
-    "keyboard": "c",
+    "shortcutKey": "c",
     "volume": 1,
     "color": "yellow"
   },
   {
     "display": "Cowbell",
     "srcName": "Cowbell 808",
-    "keyboard": "v",
+    "shortcutKey": "v",
     "volume": 1,
     "color": "turquoise"
   }

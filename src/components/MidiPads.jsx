@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PadButton from "./PadButton";
 
 import "../stylesheets/midi-buttons.scss";
+const Mousetrap = require("mousetrap");
 
 class MidiPads extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class MidiPads extends Component {
 
   componentDidMount() {
     this.loadSounds();
+    this.bindKeyboardEvents();
   }
 
   loadSounds() {
@@ -33,14 +35,20 @@ class MidiPads extends Component {
   playSound(idx) {
     const audio = this.state.audios[idx];
 
-    console.log("playSound, audio=" + audio);
-
     if (!audio.ended) {
       audio.pause();
       audio.currentTime = 0;
     }
 
     audio.play();
+  }
+
+  bindKeyboardEvents() {
+    const { pads } = this.props;
+
+    pads.forEach((item, idx) => {
+      Mousetrap.bind(item.shortcutKey, () => this.playSound(idx));
+    });
   }
 
   render() {
@@ -51,7 +59,7 @@ class MidiPads extends Component {
             <PadButton
               key={idx}
               display={item.display}
-              keyboard={item.keyboard}
+              shortcutKey={item.shortcutKey}
               color={item.color}
               onClick={() => this.playSound(idx)}
             />

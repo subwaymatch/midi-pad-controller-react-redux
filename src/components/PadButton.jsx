@@ -2,12 +2,12 @@ import React, { Component } from "react";
 
 class PadButton extends Component {
   render() {
-    const { display, keyboard, color, onClick } = this.props;
+    const { display, shortcutKey, color, onClick } = this.props;
     const classStr = "pad-button " + color;
 
     return (
       <div className={classStr} onClick={onClick}>
-        <span className="text-display">{display + " / " + keyboard}</span>
+        <span className="text-display">{display + " / " + shortcutKey}</span>
       </div>
     );
   }

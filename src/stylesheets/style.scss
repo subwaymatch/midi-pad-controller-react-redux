@@ -1,6 +1,7 @@
 body {
   margin: 0;
   background-color: #111;
+  background: linear-gradient(140deg, #222 0%, #000 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   height: 100%;
   font-family: "Roboto", sans-serif;
 }
@@ -16,4 +17,40 @@ body,
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+#midi-controls-wrapper {
+  color: #fff;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+
+  .control-section {
+    padding: 30px 40px;
+    display: flex;
+    align-items: center;
+
+    &.clickable {
+      cursor: pointer;
+
+      &:hover {
+        color: #01c6bd;
+      }
+    }
+
+    i.icon {
+      font-size: 24px;
+      line-height: 1;
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+
+  #volume-control {
+    width: 160px;
+  }
 }
