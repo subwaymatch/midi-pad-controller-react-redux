@@ -36,6 +36,8 @@ class MidiPads extends Component {
       audio.currentTime = 0;
     }
 
+    audio.volume = this.props.volume;
+
     audio.play();
   }
 
@@ -60,7 +62,8 @@ class MidiPads extends Component {
 
 const mapStateToProps = state => ({
   audioSource: state.audioSource,
-  pads: state.pads
+  pads: state.pads,
+  volume: state.volume
 });
 
 const mapDispatchToProps = dispatch => ({});

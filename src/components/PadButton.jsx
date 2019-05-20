@@ -10,6 +10,7 @@ class PadButton extends Component {
       isActive: false
     };
 
+    this.isKeyPressed = false;
     this.buttonRef = React.createRef();
 
     this.bindShortcutKey = this.bindShortcutKey.bind(this);
@@ -27,12 +28,19 @@ class PadButton extends Component {
   bindShortcutKey() {
     const { shortcutKey } = this.props;
 
-    Mousetrap.bind(shortcutKey, () => {
+    Mousetrap.bind(shortcutKey, e => {
+      e.preventDefault();
+
+      if (this.isKeyPressed) {
+        return;
+      }
+
       this.buttonRef.current.click();
 
       this.setState({
         isActive: true
       });
+      this.isKeyPressed = true;
 
       setTimeout(() => {
         this.setState({
@@ -40,6 +48,17 @@ class PadButton extends Component {
         });
       }, 100);
     });
+
+    // Prevent auto-repeat keyboard events
+    Mousetrap.bind(
+      shortcutKey,
+      e => {
+        e.preventDefault();
+
+        this.isKeyPressed = false;
+      },
+      "keyup"
+    );
   }
 
   unbindShortcutKey() {

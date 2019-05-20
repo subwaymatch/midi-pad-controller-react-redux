@@ -5,6 +5,8 @@ import "rc-tooltip/assets/bootstrap.css";
 import Tooltip from "rc-tooltip";
 import Slider from "rc-slider";
 
+import { changeVolume } from "../actions";
+
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
 const Handle = Slider.Handle;
@@ -18,6 +20,8 @@ class MidiControls extends Component {
 
   handleVolumeChange(values) {
     const { value, dragging, index, ...restProps } = values;
+
+    this.props.dispatchChangeVolume(value / 100);
 
     return (
       <Tooltip
@@ -40,12 +44,10 @@ class MidiControls extends Component {
           <Slider
             min={0}
             max={100}
-            defaultValue={50}
+            defaultValue={Math.round(this.props.volume * 100)}
             handle={this.handleVolumeChange}
           />
         </div>
-
-        <div className="control-separator" />
 
         <div
           id="map-button-control"
@@ -60,9 +62,13 @@ class MidiControls extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  volume: state.volume
+});
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  dispatchChangeVolume: volume => dispatch(changeVolume(volume))
+});
 
 export default connect(
   mapStateToProps,
