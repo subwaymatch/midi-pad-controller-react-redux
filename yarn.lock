@@ -8561,6 +8561,14 @@ react-app-polyfill@^1.0.0:
     regenerator-runtime "0.13.2"
     whatwg-fetch "3.0.0"
 
+react-contexify@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/react-contexify/-/react-contexify-4.1.0.tgz#3b3d8fdea3ea273e712788acb189101c5e385555"
+  integrity sha512-CbLBgw19Z100mhvrTGM2PuI0ON/3ZY5ek1PuUGoLVg1dSD182uJ34gYJaIDyOoSTMEXeYven13oNu4HBWERT7w==
+  dependencies:
+    classnames "^2.2.6"
+    prop-types "^15.6.2"
+
 react-dev-utils@^9.0.0:
   version "9.0.0"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-9.0.0.tgz#356d95db442441c5d4748e0e49f4fd1e71aecbbd"

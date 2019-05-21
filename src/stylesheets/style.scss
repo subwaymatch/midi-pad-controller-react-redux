@@ -9,15 +9,23 @@ body {
 html,
 body,
 #root,
-#app-wrapper {
+#app,
+#midi-pad,
+#settings-sidebar {
   height: 100%;
 }
 
-#app-wrapper {
+#app {
+  display: flex;
+  flex-direction: row;
+}
+
+#midi-pad {
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  flex-grow: 1;
 }
 
 #midi-controls-wrapper {
@@ -42,11 +50,14 @@ body,
       }
     }
 
+    .icon-wrapper {
+      width: 20px;
+      margin-right: 15px;
+    }
+
     i.icon {
       font-size: 24px;
       line-height: 1;
-      display: inline-block;
-      margin-right: 15px;
     }
   }
 

@@ -1,6 +1,10 @@
 import React, { Component } from "react";
+import { Menu, Item, contextMenu } from "react-contexify";
+import "react-contexify/dist/ReactContexify.min.css";
 const Mousetrap = require("mousetrap");
 const classnames = require("classnames");
+
+const onClick = ({ event, props }) => console.log(event, props);
 
 class PadButton extends Component {
   constructor(props) {
@@ -12,7 +16,9 @@ class PadButton extends Component {
 
     this.isKeyPressed = false;
     this.buttonRef = React.createRef();
+    this.contextMenuId = "context_menu_" + props.idx;
 
+    this.handleContextMenu = this.handleContextMenu.bind(this);
     this.bindShortcutKey = this.bindShortcutKey.bind(this);
     this.unbindShortcutKey = this.unbindShortcutKey.bind(this);
   }
@@ -23,6 +29,21 @@ class PadButton extends Component {
 
   componentWillUnmount() {
     this.unbindShortcutKey();
+  }
+
+  PadButtonContextMenu = () => (
+    <Menu id={this.contextMenuId}>
+      <Item onClick={onClick}>Change Sound / Shortcut</Item>
+    </Menu>
+  );
+
+  handleContextMenu(e) {
+    e.preventDefault();
+    contextMenu.show({
+      id: this.contextMenuId,
+      event: e,
+      props: {}
+    });
   }
 
   bindShortcutKey() {
@@ -80,8 +101,15 @@ class PadButton extends Component {
     const classStr = classnames(classStrObj);
 
     return (
-      <div className={classStr} ref={this.buttonRef} onClick={play}>
-        <span className="text-display">{display + " / " + shortcutKey}</span>
+      <div
+        onContextMenu={this.handleContextMenu}
+        className="pad-button-context-area"
+      >
+        <div className={classStr} ref={this.buttonRef} onClick={play}>
+          <span className="text-display">{display + " / " + shortcutKey}</span>
+        </div>
+
+        <this.PadButtonContextMenu />
       </div>
     );
   }

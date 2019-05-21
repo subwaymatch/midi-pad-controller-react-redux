@@ -50,7 +50,9 @@ class MidiControls extends Component {
     return (
       <div id="midi-controls-wrapper">
         <div id="volume-control" className="control-section">
-          <i className={iconClassStr} />
+          <div className="icon-wrapper">
+            <i className={iconClassStr} />
+          </div>
           <Slider
             min={0}
             max={100}
@@ -70,7 +72,10 @@ class MidiControls extends Component {
           className="control-section clickable"
           onClick={() => {}}
         >
-          <i className="icon ion-ios-settings" />
+          <div className="icon-wrapper">
+            <i className="icon ion-ios-settings" />
+          </div>
+
           <span>Change Sounds/Shortcuts</span>
         </div>
       </div>

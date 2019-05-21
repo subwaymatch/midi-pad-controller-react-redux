@@ -25,12 +25,17 @@ $pad-color-green: #01ac3c;
   width: ($pad-button-size + (2 * $pad-button-margin)) * 4;
 }
 
-.pad-button {
+.pad-button-context-area {
   display: inline-block;
   width: $pad-button-size;
   height: $pad-button-size;
-  border-radius: 8px;
   margin: $pad-button-margin;
+}
+
+.pad-button {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
   position: relative;
   cursor: pointer;
 

@@ -48,6 +48,7 @@ class MidiPads extends Component {
           return (
             <PadButton
               key={idx}
+              idx={idx}
               display={item.display}
               shortcutKey={item.shortcutKey}
               color={item.color}
