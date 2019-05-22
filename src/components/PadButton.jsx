@@ -32,8 +32,14 @@ class PadButton extends Component {
   }
 
   PadButtonContextMenu = () => (
-    <Menu id={this.contextMenuId}>
-      <Item onClick={onClick}>Change Sound / Shortcut</Item>
+    <Menu
+      id={this.contextMenuId}
+      style={{ fontSize: "14px", lineHeight: "1.4" }}
+    >
+      <Item disabled>
+        {this.props.display} / {this.props.shortcutKey}
+      </Item>
+      <Item onClick={onClick}>Change Sound or Shortcut</Item>
     </Menu>
   );
 
