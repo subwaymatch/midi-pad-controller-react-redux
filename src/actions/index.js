@@ -9,10 +9,12 @@ export const changeVolume = volume => ({
 
 export const OPEN_BUTTON_EDIT_SIDEBAR = "OPEN_BUTTON_EDIT_SIDEBAR";
 
-export const openButtonEditSidebar = btnIdx => ({
+export const openButtonEditSidebar = (btnIdx, color, srcName) => ({
   type: OPEN_BUTTON_EDIT_SIDEBAR,
   payload: {
-    btnIdx
+    btnIdx,
+    color,
+    srcName
   }
 });
 
@@ -34,10 +36,10 @@ export const changeButtonColor = (btnIdx, color) => ({
 
 export const CHANGE_BUTTON_SOUND = "CHANGE_BUTTON_SOUND";
 
-export const changeButtonSound = (btnIdx, sound) => ({
+export const changeButtonSound = (btnIdx, srcName) => ({
   type: CHANGE_BUTTON_SOUND,
   payload: {
     btnIdx,
-    sound
+    srcName
   }
 });

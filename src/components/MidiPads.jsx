@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import { openButtonEditSidebar } from "../actions";
 import PadButton from "./PadButton";
 
 import "../stylesheets/midi-buttons.scss";
@@ -14,6 +14,7 @@ class MidiPads extends Component {
     };
 
     this.playSound = this.playSound.bind(this);
+    this.openEditSidebar = this.openEditSidebar.bind(this);
   }
 
   componentDidMount() {
@@ -28,8 +29,8 @@ class MidiPads extends Component {
     });
   }
 
-  playSound(idx) {
-    const audio = this.state.audios[idx];
+  playSound(btnIdx) {
+    const audio = this.state.audios[btnIdx];
 
     if (!audio.ended) {
       audio.pause();
@@ -39,6 +40,16 @@ class MidiPads extends Component {
     audio.volume = this.props.volume;
 
     audio.play();
+  }
+
+  openEditSidebar(btnIdx) {
+    const { pads, dispatchOpenButtonEditSidebar } = this.props;
+
+    dispatchOpenButtonEditSidebar(
+      btnIdx,
+      pads[btnIdx].color,
+      pads[btnIdx].srcName
+    );
   }
 
   render() {
@@ -53,6 +64,7 @@ class MidiPads extends Component {
               shortcutKey={item.shortcutKey}
               color={item.color}
               play={() => this.playSound(idx)}
+              edit={() => this.openEditSidebar(idx)}
             />
           );
         })}
@@ -67,7 +79,10 @@ const mapStateToProps = state => ({
   volume: state.volume
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  dispatchOpenButtonEditSidebar: (btnIdx, color, srcName) =>
+    dispatch(openButtonEditSidebar(btnIdx, color, srcName))
+});
 
 export default connect(
   mapStateToProps,

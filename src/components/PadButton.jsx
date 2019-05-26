@@ -4,8 +4,6 @@ import "react-contexify/dist/ReactContexify.min.css";
 const Mousetrap = require("mousetrap");
 const classnames = require("classnames");
 
-const onClick = ({ event, props }) => console.log(event, props);
-
 class PadButton extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +37,7 @@ class PadButton extends Component {
       <Item disabled>
         {this.props.display} / {this.props.shortcutKey}
       </Item>
-      <Item onClick={onClick}>Change Sound or Color</Item>
+      <Item onClick={() => this.props.edit()}>Change Sound or Color</Item>
     </Menu>
   );
 

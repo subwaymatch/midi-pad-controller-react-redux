@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import audioSrcData from "../data/audio-src";
 import ButtonColorSelect from "./ButtonColorSelect";
+import { closeButtonEditSidebar } from "../actions";
 
 const classnames = require("classnames");
 
@@ -9,25 +10,25 @@ class PadButtonEditBox extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      selectedOption: null
-    };
-
     this.handleAudioSrcSelect = this.handleAudioSrcSelect.bind(this);
+    this.close = this.close.bind(this);
   }
 
-  handleColorChange = selectedOption => {
-    this.setState({ selectedOption });
-    console.log(`Option selected:`, selectedOption);
-  };
-
-  handleAudioSrcSelect(displayName, src) {
+  handleAudioSrcSelect(srcName, src) {
     const audio = new Audio(src);
     audio.volume = this.props.volume;
     audio.play();
   }
 
+  close() {
+    const { dispatchCloseButtonEditSidebar } = this.props;
+
+    dispatchCloseButtonEditSidebar();
+  }
+
   render() {
+    console.log(this.props.padButtonEdit);
+
     return (
       <div id="pad-button-edit-box">
         <ButtonColorSelect />
@@ -65,7 +66,7 @@ class PadButtonEditBox extends Component {
         </div>
 
         <div id="action-buttons-wrapper">
-          <button className="close-button">
+          <button className="close-button" onClick={this.close}>
             <i className="icon ion-md-close" />
             Close
           </button>
@@ -76,10 +77,13 @@ class PadButtonEditBox extends Component {
 }
 
 const mapStateToProps = state => ({
-  volume: state.volume
+  volume: state.volume,
+  padButtonEdit: state.padButtonEdit
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  dispatchCloseButtonEditSidebar: () => dispatch(closeButtonEditSidebar())
+});
 
 export default connect(
   mapStateToProps,
