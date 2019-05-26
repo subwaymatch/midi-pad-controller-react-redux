@@ -73,10 +73,8 @@ class MidiControls extends Component {
           onClick={() => {}}
         >
           <div className="icon-wrapper">
-            <i className="icon ion-ios-settings" />
+            <i className="icon ion-md-help-circle" />
           </div>
-
-          <span>Change Sounds/Shortcuts</span>
         </div>
       </div>
     );
