@@ -2,17 +2,6 @@ import React from "react";
 import chroma from "chroma-js";
 import Select from "react-select";
 
-/*
-$pad-color-default: #888888;
-$pad-color-blue: #0097f0;
-$pad-color-orange: #e64c00;
-$pad-color-magenta: #f731ed;
-$pad-color-yellow: #d2d900;
-$pad-color-turquoise: #01c6bd;
-$pad-color-lightblue: #64cbfa;
-$pad-color-green: #01ac3c;
-*/
-
 const colourOptions = [
   { value: "default", label: "Gray", color: "#888888" },
   { value: "blue", label: "Blue", color: "#0097f0" },
@@ -40,7 +29,11 @@ const dot = (color = "#ccc") => ({
 });
 
 const colourStyles = {
-  control: styles => ({ ...styles, backgroundColor: "transparent" }),
+  control: styles => ({
+    ...styles,
+    backgroundColor: "transparent",
+    borderColor: "#333"
+  }),
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     const color = chroma(data.color);
     return {
@@ -70,7 +63,13 @@ const colourStyles = {
   },
   input: styles => ({ ...styles, ...dot() }),
   placeholder: styles => ({ ...styles, ...dot() }),
-  singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) })
+  singleValue: (styles, { data }) => ({
+    ...styles,
+    ...dot(data.color),
+    color: "white"
+  }),
+  indicatorSeparator: styles => ({ ...styles, backgroundColor: "#333" }),
+  dropdownIndicator: styles => ({ ...styles, color: "white" })
 };
 
 export default () => (

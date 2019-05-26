@@ -49,7 +49,7 @@ class MidiPads extends Component {
             <PadButton
               key={idx}
               idx={idx}
-              display={item.display}
+              display={item.srcName}
               shortcutKey={item.shortcutKey}
               color={item.color}
               play={() => this.playSound(idx)}

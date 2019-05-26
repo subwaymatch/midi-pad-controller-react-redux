@@ -29,18 +29,6 @@ class PadButtonEditBox extends Component {
     const { selectedColorOption } = this.state;
     return (
       <div id="pad-button-edit-box">
-        <div id="name-shortcut-wrapper">
-          <div id="display-name-input-wrapper">
-            <label>Display Name</label>
-            <input type="text" value="Ride" />
-          </div>
-
-          <div id="shortcut-input-wrapper">
-            <label>Shortcut</label>
-            <input type="text" value="e" />
-          </div>
-        </div>
-
         <ButtonColorSelect />
 
         <div id="audio-src-title">
@@ -58,6 +46,11 @@ class PadButtonEditBox extends Component {
               </div>
             );
           })}
+        </div>
+
+        <div id="action-buttons-wrapper">
+          <button className="save-button">Save</button>
+          <button className="cancel-button">Cancel</button>
         </div>
       </div>
     );

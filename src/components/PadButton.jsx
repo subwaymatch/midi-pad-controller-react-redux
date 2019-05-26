@@ -39,7 +39,7 @@ class PadButton extends Component {
       <Item disabled>
         {this.props.display} / {this.props.shortcutKey}
       </Item>
-      <Item onClick={onClick}>Change Sound or Shortcut</Item>
+      <Item onClick={onClick}>Change Sound or Color</Item>
     </Menu>
   );
 
@@ -104,6 +104,7 @@ class PadButton extends Component {
 
     classStrObj[colorClassStr] = true;
 
+    const displayStr = display.substring(0, display.indexOf(" "));
     const classStr = classnames(classStrObj);
 
     return (
@@ -112,7 +113,9 @@ class PadButton extends Component {
         className="pad-button-context-area"
       >
         <div className={classStr} ref={this.buttonRef} onClick={play}>
-          <span className="text-display">{display + " / " + shortcutKey}</span>
+          <span className="text-display">
+            {displayStr + " / " + shortcutKey}
+          </span>
         </div>
 
         <this.PadButtonContextMenu />

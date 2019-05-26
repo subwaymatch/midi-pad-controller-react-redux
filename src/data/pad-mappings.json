@@ -1,117 +1,85 @@
 [
   {
-    "display": "Hi-Hat",
     "srcName": "Hihat Acoustic01",
     "shortcutKey": "1",
-    "volume": 1,
     "color": "blue"
   },
   {
-    "display": "Hi-Hat",
     "srcName": "Hihat Acoustic02",
     "shortcutKey": "2",
-    "volume": 1,
     "color": "orange"
   },
   {
-    "display": "Ride",
     "srcName": "Ride Acoustic01",
     "shortcutKey": "3",
-    "volume": 1,
     "color": "lightgreen"
   },
   {
-    "display": "Ride",
     "srcName": "Ride Acoustic02",
     "shortcutKey": "4",
-    "volume": 1,
     "color": "turquoise"
   },
 
   {
-    "display": "Snare",
     "srcName": "Snare Acoustic01",
     "shortcutKey": "q",
-    "volume": 1,
     "color": "blue"
   },
   {
-    "display": "Snare",
     "srcName": "Snare Acoustic02",
     "shortcutKey": "w",
-    "volume": 1,
     "color": "orange"
   },
   {
-    "display": "Clap",
     "srcName": "Clap Analog",
     "shortcutKey": "e",
-    "volume": 1,
     "color": "lightgreen"
   },
   {
-    "display": "Clap",
     "srcName": "Clap 808",
     "shortcutKey": "r",
-    "volume": 1,
     "color": "turquoise"
   },
 
   {
-    "display": "Kick",
     "srcName": "Kick Acoustic01",
     "shortcutKey": "a",
-    "volume": 1,
     "color": "blue"
   },
   {
-    "display": "Kick",
     "srcName": "Kick Acoustic02",
     "shortcutKey": "s",
-    "volume": 1,
     "color": "orange"
   },
   {
-    "display": "Kick",
     "srcName": "Kick Classic",
     "shortcutKey": "d",
-    "volume": 1,
     "color": "lightgreen"
   },
   {
-    "display": "Kick",
     "srcName": "Kick Electro01",
     "shortcutKey": "f",
-    "volume": 1,
     "color": "turquoise"
   },
 
   {
-    "display": "Perc",
     "srcName": "Perc 808",
     "shortcutKey": "z",
-    "volume": 1,
     "color": "blue"
   },
   {
-    "display": "Tambo",
     "srcName": "Perc Tambo",
     "shortcutKey": "x",
-    "volume": 1,
     "color": "orange"
   },
   {
-    "display": "Tribal",
     "srcName": "Perc Tribal",
     "shortcutKey": "c",
-    "volume": 1,
     "color": "lightgreen"
   },
   {
-    "display": "Cowbell",
     "srcName": "Cowbell 808",
     "shortcutKey": "v",
-    "volume": 1,
     "color": "turquoise"
   }
 ]

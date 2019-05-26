@@ -90,36 +90,8 @@ body,
     margin-bottom: 10px;
   }
 
-  #name-shortcut-wrapper {
-    display: flex;
-    margin-bottom: 20px;
-    padding-right: 20px;
-
-    #display-name-input-wrapper {
-      flex-grow: 1;
-      margin-right: 20px;
-    }
-
-    #shortcut-input-wrapper {
-      width: 145px;
-    }
-
-    #display-name-input-wrapper input[type="text"],
-    #shortcut-input-wrapper input[type="text"] {
-      color: white;
-      background: transparent;
-      outline: none;
-      border: none;
-      border-bottom: 1px solid #444;
-      padding: 15px 0;
-      width: 100%;
-      font-size: 24px;
-      line-height: 1;
-    }
-  }
-
   #button-color-select-wrapper {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     padding-right: 20px;
   }
 
@@ -127,6 +99,7 @@ body,
     display: flex;
     align-items: center;
     padding-right: 20px;
+    margin-bottom: 5px;
 
     label {
       display: inline-block;
@@ -154,6 +127,7 @@ body,
     flex-grow: 1;
     overflow-y: scroll;
     font-size: 15px;
+    margin-bottom: 20px;
 
     /* Scrollbar */
     &::-webkit-scrollbar-track {
@@ -179,6 +153,42 @@ body,
       padding: 5px 0;
       align-items: center;
       cursor: pointer;
+
+      &:hover {
+        color: white;
+      }
+    }
+  }
+
+  #action-buttons-wrapper {
+    padding-right: 20px;
+
+    button {
+      cursor: pointer;
+      display: block;
+      border: none;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .save-button {
+      font-size: 16px;
+      border-radius: 40px;
+      padding: 15px;
+      color: #222;
+      background-color: #eee;
+
+      &:hover {
+        color: #444;
+        background-color: #fff;
+      }
+    }
+
+    .cancel-button {
+      font-size: 15px;
+      color: #ddd;
+      background: transparent;
+      padding: 10px;
 
       &:hover {
         color: white;
