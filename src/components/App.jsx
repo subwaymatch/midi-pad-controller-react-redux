@@ -11,8 +11,9 @@ class App extends Component {
         <div id="midi-pad">
           <MidiControls />
           <MidiPads />
-          <PadButtonEditBox />
         </div>
+
+        <PadButtonEditBox />
       </div>
     );
   }

@@ -18,7 +18,7 @@
     "srcName": "Ride Acoustic01",
     "shortcutKey": "3",
     "volume": 1,
-    "color": "yellow"
+    "color": "lightgreen"
   },
   {
     "display": "Ride",
@@ -47,7 +47,7 @@
     "srcName": "Clap Analog",
     "shortcutKey": "e",
     "volume": 1,
-    "color": "yellow"
+    "color": "lightgreen"
   },
   {
     "display": "Clap",
@@ -76,7 +76,7 @@
     "srcName": "Kick Classic",
     "shortcutKey": "d",
     "volume": 1,
-    "color": "yellow"
+    "color": "lightgreen"
   },
   {
     "display": "Kick",
@@ -105,7 +105,7 @@
     "srcName": "Perc Tribal",
     "shortcutKey": "c",
     "volume": 1,
-    "color": "yellow"
+    "color": "lightgreen"
   },
   {
     "display": "Cowbell",
