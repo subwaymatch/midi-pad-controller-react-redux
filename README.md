@@ -1,5 +1,5 @@
 # midi-pad-controller
-A MIDI pad controller
+A MIDI Pad Controller with 99 drum samples to use
 <br />
 - [See Demo](https://midi-pad-controller.netlify.com)
 - [See Code (CodeSandbox)](https://codesandbox.io/s/github/subwaymatch/midi-pad-controller-react-redux/)
@@ -11,6 +11,7 @@ A MIDI pad controller
 - Map each pad button to an audio file (from 99 sources)
 - Play with keyboard shortcuts
 - Change colors of buttons
+- Realistic pad buttons - Feel free to use the buttons in any commercial/personal projects. Please refer to ![https://codepen.io/subwaymatch/pen/EJLJVZ](https://codepen.io/subwaymatch/pen/EJLJVZ) for the markup.
 
 ## Attributions
 - [99Sounds Drum Samples](http://99sounds.org/drum-samples/)
