@@ -41,7 +41,7 @@ body,
   justify-content: space-between;
 
   .control-section {
-    padding: 30px 40px;
+    padding: 30px 35px;
     display: flex;
     align-items: center;
 
@@ -69,6 +69,54 @@ body,
 
   #volume-control {
     width: 160px;
+  }
+
+  #help-box-wrapper {
+    position: relative;
+
+    i.icon {
+      display: inline-block;
+      font-size: 24px;
+      line-height: 1;
+      padding: 30px 35px;
+      cursor: pointer;
+    }
+
+    #help-box {
+      width: 360px;
+      position: absolute;
+      top: 84px;
+      right: 30px;
+      color: white;
+      background: black;
+      display: none;
+      padding: 25px 30px;
+      box-sizing: border-box;
+      z-index: 3;
+      box-shadow: 0 0 15px rgba($primary-color, 0.3);
+
+      h4 {
+        color: #777;
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 20px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+    }
+
+    &:hover {
+      i.icon {
+        color: $primary-color;
+      }
+      #help-box {
+        display: block;
+      }
+    }
   }
 }
 

@@ -67,13 +67,15 @@ class MidiControls extends Component {
           />
         </div>
 
-        <div
-          id="map-button-control"
-          className="control-section clickable"
-          onClick={() => {}}
-        >
-          <div className="icon-wrapper">
-            <i className="icon ion-md-help-circle" />
+        <div id="help-box-wrapper">
+          <i className="icon ion-md-help-circle" />
+
+          <div id="help-box">
+            <h4>Changing Sound/Color</h4>
+            <p>Right click on a button to change its sound or color.</p>
+
+            <h4>Playing with Keyboards</h4>
+            <p>The letters on each button is the keyboard shortcut.</p>
           </div>
         </div>
       </div>

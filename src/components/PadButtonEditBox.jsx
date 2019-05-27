@@ -41,6 +41,7 @@ class PadButtonEditBox extends Component {
 
   close() {
     const { dispatchCloseButtonEditSidebar } = this.props;
+
     dispatchCloseButtonEditSidebar();
   }
 
