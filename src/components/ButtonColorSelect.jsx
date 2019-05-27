@@ -28,11 +28,12 @@ const dot = (color = "#ccc") => ({
   }
 });
 
-const colourStyles = {
+const colorStyles = {
   control: styles => ({
     ...styles,
     backgroundColor: "transparent",
-    borderColor: "#333"
+    borderColor: "#333",
+    marginRight: "20px"
   }),
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     const color = chroma(data.color);
@@ -78,24 +79,39 @@ class ButtonColorSelect extends Component {
     this.state = {
       selectedOption: null
     };
+    this.revert = this.revert.bind(this);
   }
 
   handleChange = selectedOption => {
     this.props.changeButtonColor(selectedOption.value);
   };
 
+  revert() {
+    const { changeButtonColor, originalColor } = this.props;
+    changeButtonColor(originalColor);
+  }
+
   render() {
-    const { color } = this.props;
+    const { color, originalColor } = this.props;
 
     return (
       <div id="button-color-select-wrapper">
-        <label>Button Color</label>
+        <div className="option-title">
+          <label>Button Color</label>
+
+          {originalColor !== color && (
+            <div className="revert-button" onClick={this.revert}>
+              <i className="icon ion-ios-undo" />
+              <span>Revert</span>
+            </div>
+          )}
+        </div>
         <Select
           value={colorOptions.find(c => c.value === color)}
           onChange={this.handleChange}
           label="Single select"
           options={colorOptions}
-          styles={colourStyles}
+          styles={colorStyles}
         />
       </div>
     );

@@ -59,7 +59,11 @@ class MidiPads extends Component {
   openEditSidebar(btnIdx) {
     const { pads, dispatchOpenButtonEditSidebar } = this.props;
 
-    dispatchOpenButtonEditSidebar(btnIdx, pads[btnIdx].srcName);
+    dispatchOpenButtonEditSidebar(
+      btnIdx,
+      pads[btnIdx].color,
+      pads[btnIdx].srcName
+    );
   }
 
   render() {
@@ -94,8 +98,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatchOpenButtonEditSidebar: (btnIdx, srcName) =>
-    dispatch(openButtonEditSidebar(btnIdx, srcName))
+  dispatchOpenButtonEditSidebar: (btnIdx, color, srcName) =>
+    dispatch(openButtonEditSidebar(btnIdx, color, srcName))
 });
 
 export default connect(

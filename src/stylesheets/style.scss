@@ -74,21 +74,20 @@ body,
   #help-box-wrapper {
     position: relative;
 
-    i.icon {
+    i#help-icon.icon {
       display: inline-block;
       font-size: 24px;
       line-height: 1;
       padding: 30px 35px;
-      cursor: pointer;
     }
 
     #help-box {
-      width: 360px;
+      width: 380px;
       position: absolute;
-      top: 84px;
+      top: 70px;
       right: 30px;
       color: white;
-      background: black;
+      background: rgba(0, 0, 0, 0.97);
       display: none;
       padding: 25px 30px;
       box-sizing: border-box;
@@ -99,19 +98,44 @@ body,
         color: #777;
         font-size: 15px;
         line-height: 1.6;
-        margin-bottom: 10px;
+        margin-top: 40px;
+      }
+
+      .help-item:nth-of-type(1) {
+        h4 {
+          margin-top: 0;
+        }
       }
 
       p {
         font-size: 20px;
         line-height: 1.6;
-        margin-bottom: 30px;
+        margin-top: 10px;
+      }
+
+      .button {
+        color: $primary-color;
+        text-decoration: none;
+        font-size: 15px;
+        display: block;
+        margin-top: 20px;
+        cursor: pointer;
+
+        i.icon {
+          display: inline-block;
+          margin-right: 6px;
+        }
+
+        &:hover {
+          color: lighten($primary-color, 20);
+        }
       }
     }
 
     &:hover {
-      i.icon {
+      i#help-icon.icon {
         color: $primary-color;
+        padding-left: 300px;
       }
       #help-box {
         display: block;
@@ -131,26 +155,21 @@ body,
   display: flex;
   flex-direction: column;
 
-  label {
-    font-size: 15px;
-    font-weight: 500;
-    color: #555;
-    display: block;
-    margin-bottom: 10px;
-  }
-
   #button-color-select-wrapper {
     margin-bottom: 30px;
-    padding-right: 20px;
   }
 
-  #audio-src-title {
+  .option-title {
     display: flex;
     align-items: center;
     padding-right: 20px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 
     label {
+      font-size: 15px;
+      font-weight: 500;
+      color: #555;
+      display: block;
       display: inline-block;
       flex-grow: 1;
     }

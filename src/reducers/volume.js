@@ -1,6 +1,7 @@
 import { CHANGE_VOLUME } from "../actions";
+import PersistentStorage from "../data/PersistentStorage";
 
-const initialState = 0.8;
+const initialState = PersistentStorage.loadVolume();
 
 function volume(state = initialState, action) {
   switch (action.type) {

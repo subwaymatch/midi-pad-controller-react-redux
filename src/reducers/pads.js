@@ -1,8 +1,16 @@
 import padMappings from "../data/pad-mappings";
-import { CHANGE_BUTTON_COLOR, CHANGE_BUTTON_SOUND } from "../actions";
+import PersistentStorage from "../data/PersistentStorage";
+import {
+  CHANGE_BUTTON_COLOR,
+  CHANGE_BUTTON_SOUND,
+  RESET_ALL
+} from "../actions";
 const _ = require("lodash");
 
-function pads(state = padMappings, action) {
+const initialState = PersistentStorage.loadPadMappings();
+const originalState = _.cloneDeep(padMappings);
+
+function pads(state = initialState, action) {
   let clonedState;
 
   switch (action.type) {
@@ -16,6 +24,8 @@ function pads(state = padMappings, action) {
       clonedState[action.payload.btnIdx].srcName = action.payload.srcName;
 
       return clonedState;
+    case RESET_ALL:
+      return originalState;
     default:
       return state;
   }

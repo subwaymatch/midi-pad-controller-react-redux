@@ -51,16 +51,18 @@ class PadButtonEditBox extends Component {
     if (padButtonEdit === null) return null;
 
     const { btnIdx } = padButtonEdit;
+    const originalColor = padButtonEdit.color;
     const originalSrcName = padButtonEdit.srcName;
 
     return (
       <div id="pad-button-edit-box">
         <ButtonColorSelect
           color={pads[btnIdx].color}
+          originalColor={originalColor}
           changeButtonColor={this.changeButtonColor}
         />
 
-        <div id="audio-src-title">
+        <div className="option-title">
           <label>Audio Source</label>
 
           {originalSrcName !== pads[btnIdx].srcName && (
