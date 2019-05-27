@@ -93,7 +93,7 @@ class PadButton extends Component {
   }
 
   render() {
-    const { srcName, shortcutKey, color, play } = this.props;
+    const { srcName, shortcutKey, color, play, isEditing } = this.props;
 
     const colorClassStr = "pad-button " + color;
     const classStrObj = {
@@ -114,6 +114,13 @@ class PadButton extends Component {
           <span className="text-display">
             {displayStr + " / " + shortcutKey}
           </span>
+
+          {isEditing && (
+            <div className="edit-mode-indicator">
+              <span>Editing</span>
+              <i className="icon ion-md-arrow-forward" />
+            </div>
+          )}
         </div>
 
         <this.PadButtonContextMenu />

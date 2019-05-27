@@ -12,6 +12,7 @@ class PadButtonEditBox extends Component {
     super(props);
     this.changeButtonColor = this.changeButtonColor.bind(this);
     this.handleAudioSrcSelect = this.handleAudioSrcSelect.bind(this);
+    this.revertAudioSrc = this.revertAudioSrc.bind(this);
     this.close = this.close.bind(this);
   }
 
@@ -20,8 +21,10 @@ class PadButtonEditBox extends Component {
     dispatchChangeButtonColor(padButtonEdit.btnIdx, newColor);
   }
 
-  handleAudioSrcSelect(srcName, src) {
+  handleAudioSrcSelect(srcName) {
     const { dispatchChangeButtonSound, padButtonEdit } = this.props;
+
+    const src = audioSrcData[srcName];
 
     dispatchChangeButtonSound(padButtonEdit.btnIdx, srcName);
 
@@ -30,34 +33,44 @@ class PadButtonEditBox extends Component {
     audio.play();
   }
 
+  revertAudioSrc() {
+    const { dispatchChangeButtonSound, padButtonEdit } = this.props;
+
+    dispatchChangeButtonSound(padButtonEdit.btnIdx, padButtonEdit.srcName);
+  }
+
   close() {
     const { dispatchCloseButtonEditSidebar } = this.props;
-
     dispatchCloseButtonEditSidebar();
   }
 
   render() {
-    const { btnIdx } = this.props.padButtonEdit;
+    const { pads, padButtonEdit } = this.props;
+    const { btnIdx } = padButtonEdit;
+    const originalSrcName = padButtonEdit.srcName;
 
     return (
       <div id="pad-button-edit-box">
         <ButtonColorSelect
-          color={this.props.pads[btnIdx].color}
+          color={pads[btnIdx].color}
           changeButtonColor={this.changeButtonColor}
         />
 
         <div id="audio-src-title">
           <label>Audio Source</label>
-          <div className="revert-button">
-            <i className="icon ion-ios-undo" />
-            <span>Revert</span>
-          </div>
+
+          {originalSrcName !== pads[btnIdx].srcName && (
+            <div className="revert-button" onClick={this.revertAudioSrc}>
+              <i className="icon ion-ios-undo" />
+              <span>Revert</span>
+            </div>
+          )}
         </div>
         <div id="audio-src-items">
           {Object.keys(audioSrcData).map(k => {
             const itemClassStr = classnames({
               item: true,
-              selected: k === "Clap Fat"
+              selected: k === pads[btnIdx].srcName
             });
 
             return (
@@ -65,7 +78,7 @@ class PadButtonEditBox extends Component {
                 key={k}
                 className={itemClassStr}
                 onClick={e => {
-                  this.handleAudioSrcSelect(k, audioSrcData[k]);
+                  this.handleAudioSrcSelect(k);
                 }}
               >
                 <span>{k}</span>

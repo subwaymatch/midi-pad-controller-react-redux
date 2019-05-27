@@ -87,8 +87,6 @@ class ButtonColorSelect extends Component {
   render() {
     const { color } = this.props;
 
-    console.log(color);
-
     return (
       <div id="button-color-select-wrapper">
         <label>Button Color</label>

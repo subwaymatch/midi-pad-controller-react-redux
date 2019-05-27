@@ -23,25 +23,14 @@ class MidiPads extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log("getDerivedStateFromProps");
     const { pads, audioSource } = props;
     const clonedState = _.clone(state);
 
     for (let i = 0; i < state.audios.length; i++) {
       if (audioSource[pads[i].srcName] !== state.audios[i].src) {
-        console.log("Different yeah!, btnIdx=" + i);
-        console.log(audioSource[pads[i].srcName]);
-        console.log(state.audios[i].src);
-        console.log("new srcName=" + pads[i].srcName);
-
         clonedState.audios[i] = new Audio(audioSource[pads[i].srcName]);
-
-        console.log(clonedState[i]);
       }
     }
-
-    console.log("clonedState");
-    console.log(clonedState);
 
     return clonedState;
   }
@@ -56,9 +45,6 @@ class MidiPads extends Component {
 
   playSound(btnIdx) {
     const audio = this.state.audios[btnIdx];
-
-    console.log("play");
-    console.log(audio);
 
     if (!audio.ended) {
       audio.pause();
@@ -77,10 +63,11 @@ class MidiPads extends Component {
   }
 
   render() {
-    console.log("MidiPads.render");
+    const { pads, padButtonEdit } = this.props;
+
     return (
       <div id="pad-buttons-wrapper">
-        {this.props.pads.map((item, idx) => {
+        {pads.map((item, idx) => {
           return (
             <PadButton
               key={idx}
@@ -88,6 +75,7 @@ class MidiPads extends Component {
               srcName={item.srcName}
               shortcutKey={item.shortcutKey}
               color={item.color}
+              isEditing={padButtonEdit && padButtonEdit.btnIdx === idx}
               play={() => this.playSound(idx)}
               edit={() => this.openEditSidebar(idx)}
             />
@@ -101,6 +89,7 @@ class MidiPads extends Component {
 const mapStateToProps = state => ({
   audioSource: state.audioSource,
   pads: state.pads,
+  padButtonEdit: state.padButtonEdit,
   volume: state.volume
 });
 
