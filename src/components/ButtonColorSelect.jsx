@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import chroma from "chroma-js";
 import Select from "react-select";
+import { Tooltip } from "react-tippy";
+import "react-tippy/dist/tippy.css";
 
 const colorOptions = [
   { value: "default", label: "Gray", color: "#888888" },
@@ -100,10 +102,20 @@ class ButtonColorSelect extends Component {
           <label>Button Color</label>
 
           {originalColor !== color && (
-            <div className="revert-button" onClick={this.revert}>
-              <i className="icon ion-ios-undo" />
-              <span>Revert</span>
-            </div>
+            <Tooltip
+              animation="shift"
+              duration={100}
+              animateFill={false}
+              hideOnClick={false}
+              title={"Revert to " + originalColor}
+              position="bottom"
+              theme="dark"
+            >
+              <div className="revert-button" onClick={this.revert}>
+                <i className="icon ion-ios-undo" />
+                <span>Revert</span>
+              </div>
+            </Tooltip>
           )}
         </div>
         <Select

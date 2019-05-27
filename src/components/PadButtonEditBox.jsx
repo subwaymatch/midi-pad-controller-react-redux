@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Tooltip } from "react-tippy";
+import "react-tippy/dist/tippy.css";
 import audioSrcData from "../data/audio-src";
 import ButtonColorSelect from "./ButtonColorSelect";
 import { closeButtonEditSidebar } from "../actions";
@@ -67,8 +69,18 @@ class PadButtonEditBox extends Component {
 
           {originalSrcName !== pads[btnIdx].srcName && (
             <div className="revert-button" onClick={this.revertAudioSrc}>
-              <i className="icon ion-ios-undo" />
-              <span>Revert</span>
+              <Tooltip
+                animation="shift"
+                duration={100}
+                animateFill={false}
+                hideOnClick={false}
+                title={"Revert to " + originalSrcName}
+                position="bottom"
+                theme="dark"
+              >
+                <i className="icon ion-ios-undo" />
+                <span>Revert</span>
+              </Tooltip>
             </div>
           )}
         </div>
