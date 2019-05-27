@@ -46,6 +46,9 @@ class PadButtonEditBox extends Component {
 
   render() {
     const { pads, padButtonEdit } = this.props;
+
+    if (padButtonEdit === null) return null;
+
     const { btnIdx } = padButtonEdit;
     const originalSrcName = padButtonEdit.srcName;
 
