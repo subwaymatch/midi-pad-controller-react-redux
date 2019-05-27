@@ -2,7 +2,7 @@
 A MIDI pad controller
 <br />
 - [See Demo](https://midi-pad-controller.netlify.com)
-- [See CodeSandbox](https://codesandbox.io/s/github/subwaymatch/midi-pad-controller-react-redux/)
+- [See Code (CodeSandbox)](https://codesandbox.io/s/github/subwaymatch/midi-pad-controller-react-redux/)
 
 ![midi_controller_edit_button](https://user-images.githubusercontent.com/1064036/58427440-7af51100-8054-11e9-85c3-8fab9719eb2c.png)
 
