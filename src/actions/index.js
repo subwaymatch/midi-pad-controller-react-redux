@@ -9,11 +9,10 @@ export const changeVolume = volume => ({
 
 export const OPEN_BUTTON_EDIT_SIDEBAR = "OPEN_BUTTON_EDIT_SIDEBAR";
 
-export const openButtonEditSidebar = (btnIdx, color, srcName) => ({
+export const openButtonEditSidebar = (btnIdx, srcName) => ({
   type: OPEN_BUTTON_EDIT_SIDEBAR,
   payload: {
     btnIdx,
-    color,
     srcName
   }
 });

@@ -35,7 +35,7 @@ class PadButton extends Component {
       style={{ fontSize: "14px", lineHeight: "1.4" }}
     >
       <Item disabled>
-        {this.props.display} / {this.props.shortcutKey}
+        {this.props.srcName} / {this.props.shortcutKey}
       </Item>
       <Item onClick={() => this.props.edit()}>Change Sound or Color</Item>
     </Menu>
@@ -93,7 +93,7 @@ class PadButton extends Component {
   }
 
   render() {
-    const { display, shortcutKey, color, play } = this.props;
+    const { srcName, shortcutKey, color, play } = this.props;
 
     const colorClassStr = "pad-button " + color;
     const classStrObj = {
@@ -102,7 +102,7 @@ class PadButton extends Component {
 
     classStrObj[colorClassStr] = true;
 
-    const displayStr = display.substring(0, display.indexOf(" "));
+    const displayStr = srcName.substring(0, srcName.indexOf(" "));
     const classStr = classnames(classStrObj);
 
     return (

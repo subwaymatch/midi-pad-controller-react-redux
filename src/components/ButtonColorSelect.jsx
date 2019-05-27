@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import chroma from "chroma-js";
 import Select from "react-select";
 
-const colourOptions = [
+const colorOptions = [
   { value: "default", label: "Gray", color: "#888888" },
   { value: "blue", label: "Blue", color: "#0097f0" },
   { value: "orange", label: "Orange", color: "#e64c00" },
@@ -72,14 +72,36 @@ const colourStyles = {
   dropdownIndicator: styles => ({ ...styles, color: "white" })
 };
 
-export default () => (
-  <div id="button-color-select-wrapper">
-    <label>Button Color</label>
-    <Select
-      defaultValue={colourOptions[2]}
-      label="Single select"
-      options={colourOptions}
-      styles={colourStyles}
-    />
-  </div>
-);
+class ButtonColorSelect extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedOption: null
+    };
+  }
+
+  handleChange = selectedOption => {
+    this.props.changeButtonColor(selectedOption.value);
+  };
+
+  render() {
+    const { color } = this.props;
+
+    console.log(color);
+
+    return (
+      <div id="button-color-select-wrapper">
+        <label>Button Color</label>
+        <Select
+          value={colorOptions.find(c => c.value === color)}
+          onChange={this.handleChange}
+          label="Single select"
+          options={colorOptions}
+          styles={colourStyles}
+        />
+      </div>
+    );
+  }
+}
+
+export default ButtonColorSelect;

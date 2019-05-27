@@ -3,18 +3,28 @@ import { connect } from "react-redux";
 import audioSrcData from "../data/audio-src";
 import ButtonColorSelect from "./ButtonColorSelect";
 import { closeButtonEditSidebar } from "../actions";
+import { changeButtonColor, changeButtonSound } from "../actions";
 
 const classnames = require("classnames");
 
 class PadButtonEditBox extends Component {
   constructor(props) {
     super(props);
-
+    this.changeButtonColor = this.changeButtonColor.bind(this);
     this.handleAudioSrcSelect = this.handleAudioSrcSelect.bind(this);
     this.close = this.close.bind(this);
   }
 
+  changeButtonColor(newColor) {
+    const { dispatchChangeButtonColor, padButtonEdit } = this.props;
+    dispatchChangeButtonColor(padButtonEdit.btnIdx, newColor);
+  }
+
   handleAudioSrcSelect(srcName, src) {
+    const { dispatchChangeButtonSound, padButtonEdit } = this.props;
+
+    dispatchChangeButtonSound(padButtonEdit.btnIdx, srcName);
+
     const audio = new Audio(src);
     audio.volume = this.props.volume;
     audio.play();
@@ -27,11 +37,14 @@ class PadButtonEditBox extends Component {
   }
 
   render() {
-    console.log(this.props.padButtonEdit);
+    const { btnIdx } = this.props.padButtonEdit;
 
     return (
       <div id="pad-button-edit-box">
-        <ButtonColorSelect />
+        <ButtonColorSelect
+          color={this.props.pads[btnIdx].color}
+          changeButtonColor={this.changeButtonColor}
+        />
 
         <div id="audio-src-title">
           <label>Audio Source</label>
@@ -77,11 +90,16 @@ class PadButtonEditBox extends Component {
 }
 
 const mapStateToProps = state => ({
+  pads: state.pads,
   volume: state.volume,
   padButtonEdit: state.padButtonEdit
 });
 
 const mapDispatchToProps = dispatch => ({
+  dispatchChangeButtonColor: (btnIdx, color) =>
+    dispatch(changeButtonColor(btnIdx, color)),
+  dispatchChangeButtonSound: (btnIdx, srcName) =>
+    dispatch(changeButtonSound(btnIdx, srcName)),
   dispatchCloseButtonEditSidebar: () => dispatch(closeButtonEditSidebar())
 });
 

@@ -8,14 +8,12 @@ function pads(state = padMappings, action) {
   switch (action.type) {
     case CHANGE_BUTTON_COLOR:
       clonedState = _.clone(state);
-      clonedState[this.action.payload.btnIdx].color = this.action.payload.color;
+      clonedState[action.payload.btnIdx].color = action.payload.color;
 
       return clonedState;
     case CHANGE_BUTTON_SOUND:
       clonedState = _.clone(state);
-      clonedState[
-        this.action.payload.btnIdx
-      ].srcName = this.action.payload.srcName;
+      clonedState[action.payload.btnIdx].srcName = action.payload.srcName;
 
       return clonedState;
     default:
