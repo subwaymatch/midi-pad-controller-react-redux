@@ -11,7 +11,7 @@ A MIDI Pad Controller with 99 drum samples to use
 - Map each pad button to an audio file (from 99 sources)
 - Play with keyboard shortcuts
 - Change colors of buttons
-- Realistic pad buttons - Feel free to use the buttons in any commercial/personal projects. Please refer to ![https://codepen.io/subwaymatch/pen/EJLJVZ](https://codepen.io/subwaymatch/pen/EJLJVZ) for the markup.
+- Realistic pad buttons - Feel free to use the buttons in any commercial/personal projects. Please refer to [this codepen](https://codepen.io/subwaymatch/pen/EJLJVZ) for the markup.
 
 ## Attributions
 - [99Sounds Drum Samples](http://99sounds.org/drum-samples/)
