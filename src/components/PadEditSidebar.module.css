@@ -21,6 +21,13 @@
   display: none;
 }
 
+/* The panel takes focus on open to seed the focus trap, which is plumbing, not
+   navigation: the ring belongs on the controls inside it, not around the whole
+   panel. */
+.dialog:focus-visible {
+  outline: none;
+}
+
 @keyframes panel-in {
   from {
     opacity: 0;

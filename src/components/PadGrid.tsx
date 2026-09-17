@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePadShortcuts } from "@/hooks/usePadShortcuts";
+import { usePointerDriven } from "@/hooks/usePointerDriven";
 import type { SamplePlayer } from "@/lib/audio/SamplePlayer";
 import { sampleUrl } from "@/lib/samples";
 import { editorOpened } from "@/store/editorSlice";
@@ -27,6 +28,7 @@ export function PadGrid({ player }: { player: SamplePlayer }) {
   // Held so focus can go back to the edit button once the editor closes.
   const editButtons = useRef(new Map<number, HTMLButtonElement>());
   const previousEditing = useRef<number | null>(null);
+  const pointerDriven = usePointerDriven();
 
   useEffect(() => {
     // Preloading the default layout before the saved one has been read would
@@ -42,13 +44,17 @@ export function PadGrid({ player }: { player: SamplePlayer }) {
     const closed = previousEditing.current;
     previousEditing.current = editingIndex;
     if (editingIndex !== null || closed === null) return;
+    // A pointer strands nobody: the user is looking at whatever they clicked,
+    // and focus put on a pad's hidden edit button would only show up as a ring
+    // around it the moment the next note is played.
+    if (pointerDriven.current) return;
     // Only when the editor left focus stranded on the body. Closing as a side
     // effect of something else, a reset from the help panel say, must not pull
     // focus away from whatever the user is actually using.
     const active = document.activeElement;
     if (active && active !== document.body) return;
     editButtons.current.get(closed)?.focus();
-  }, [editingIndex]);
+  }, [editingIndex, pointerDriven]);
 
   useEffect(() => {
     const timers = flashTimers.current;

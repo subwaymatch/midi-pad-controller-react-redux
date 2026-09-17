@@ -4,6 +4,11 @@
   align-items: center;
   gap: 16px;
   padding: 16px 24px;
+  /* --panel-gutter is the open editor panel's column; see
+     `MidiPad.module.css`. Without it the bar's right-hand controls sit inside
+     the panel and show through it. */
+  padding-right: calc(24px + var(--panel-gutter, 0px));
+  transition: padding-right 0.25s ease-out;
   color: #fff;
 }
 
@@ -14,6 +19,7 @@
 @media (max-height: 560px) {
   .bar {
     padding: 8px 16px;
+    padding-right: calc(16px + var(--panel-gutter, 0px));
   }
 }
 
@@ -21,5 +27,6 @@
   .bar {
     gap: 8px;
     padding: 12px 12px;
+    padding-right: calc(12px + var(--panel-gutter, 0px));
   }
 }
