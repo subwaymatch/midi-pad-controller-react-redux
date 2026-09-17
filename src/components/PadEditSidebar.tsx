@@ -3,7 +3,7 @@
 import { useCallback, useLayoutEffect, useRef, type CSSProperties, type MouseEvent, type KeyboardEvent } from "react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import type { SamplePlayer } from "@/lib/audio/SamplePlayer";
-import { padColorHex, padColorLabel, padLabelHex, type PadColor } from "@/lib/colors";
+import { padColorHex, padColorLabel, type PadColor } from "@/lib/colors";
 import { cx } from "@/lib/cx";
 import { SAMPLE_NAMES, sampleUrl, shortSampleName } from "@/lib/samples";
 import { editorClosed, type EditorState } from "@/store/editorSlice";
@@ -107,7 +107,6 @@ export function PadEditSidebar({ editor, player }: PadEditSidebarProps) {
             style={
               {
                 "--pad": padColorHex(pad.color),
-                "--pad-label": padLabelHex(pad.color),
               } as CSSProperties
             }
             aria-hidden="true"
