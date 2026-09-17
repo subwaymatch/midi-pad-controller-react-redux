@@ -1,0 +1,64 @@
+.help {
+  position: relative;
+}
+
+.toggle {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 24px;
+  color: #fff;
+}
+
+.toggle:hover,
+.toggle[aria-expanded="true"] {
+  color: var(--color-primary);
+}
+
+.panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 3;
+  width: min(380px, calc(100vw - 32px));
+  padding: 25px 30px;
+  border-radius: 6px;
+  background: rgb(0 0 0 / 0.97);
+  box-shadow: 0 0 15px rgb(1 198 189 / 0.3);
+}
+
+.panel h2 {
+  margin-top: 30px;
+  color: #777;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.panel section:first-child h2 {
+  margin-top: 0;
+}
+
+.panel p {
+  margin-top: 8px;
+  font-size: 18px;
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  font-size: 15px;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.action:hover {
+  color: color-mix(in srgb, var(--color-primary) 70%, white);
+}
+
+.action strong {
+  font-weight: 500;
+}
