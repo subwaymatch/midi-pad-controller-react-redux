@@ -11,10 +11,12 @@ Built with Next.js (App Router, TypeScript), Redux Toolkit and the Web Audio API
 - 16 pads in a 4x4 grid, playable with a mouse, a finger or the keyboard. The letter on each pad is its shortcut key.
 - 99 samples from [99Sounds Drum Samples](https://99sounds.org/drum-samples/), bundled with the app.
 - Right-click a pad, or press its edit button, to change its sample or one of eight colors. Revert either change with one click.
-- Master volume slider.
+- On a touch screen, turn on **Edit pads** in the top bar and tap a pad to edit it: there is no hover to reveal a per-pad button, and a permanent one would sit where a thumb lands.
+- The grid is sized by the space available, so all 16 pads stay on screen on a landscape phone or in a short desktop window, with no scrolling mid-performance.
+- Master volume slider, with the speaker icon as a mute toggle.
 - Layout and volume persist in `localStorage`. Layouts saved by the original 2019 version of this app still load.
 - Low-latency, polyphonic playback through the Web Audio API. Samples are decoded once and every hit starts instantly.
-- Keyboard accessible: pads, the editor and the help panel all work without a pointer.
+- Keyboard accessible: pads, the editor and the help panel all work without a pointer. The editor is a `<dialog>`, modal where it covers the pads, so Escape, a focus trap and a dismissable backdrop come with it, and focus returns to the button that opened it.
 - Realistic pad buttons. Feel free to use them in any commercial or personal project; see [this CodePen](https://codepen.io/subwaymatch/pen/EJLJVZ) for the original markup.
 
 ## Development
@@ -27,7 +29,11 @@ npm run dev        # http://localhost:3000
 npm run check      # lint + typecheck + tests
 npm run build      # static export in ./out
 npm run preview    # build, then serve ./out locally the way Cloudflare would
+npm run icons      # regenerate the PWA icons in ./public
 ```
+
+The build is hermetic: fonts are vendored in `src/app/fonts`, so nothing is
+fetched from the network while building either.
 
 ## Deploying
 
@@ -64,9 +70,12 @@ src/hooks/           keyboard shortcuts, sample player lifecycle
 src/lib/             sample catalog, colors, localStorage, Web Audio player
 src/store/           Redux Toolkit slices, store and provider
 src/data/            sample catalog and default pad layout
+src/app/fonts/       vendored Roboto, so builds need no network
+scripts/             PWA icon generator (npm run icons)
 ```
 
 ## Attributions
 
 - Drum samples: [99Sounds Drum Samples](https://99sounds.org/drum-samples/), free for commercial and non-commercial use.
 - Icons adapted from [Feather Icons](https://feathericons.com/) (MIT).
+- Typeface: [Roboto](https://fonts.google.com/specimen/Roboto) (Apache 2.0), vendored in `src/app/fonts`.

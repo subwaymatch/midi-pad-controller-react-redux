@@ -40,6 +40,9 @@
   outline-offset: 2px;
 }
 
+/* Not just a colour change on the checked ring: an unchecked swatch has no
+   ring of its own, so focus needs to draw one. */
 .input:focus-visible + .dot {
-  outline-color: var(--color-primary);
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
 }

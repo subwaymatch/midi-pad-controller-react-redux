@@ -3,10 +3,20 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
   width: min(640px, 100%);
+  /* The pads are square, so the grid is too: capping its width by the height
+     of the stage is what keeps every row on screen. Browsers without container
+     query units fall back to the width-only rule above. */
+  width: min(640px, 100cqw, 100cqh);
 }
 
 @media (max-width: 480px) {
   .grid {
     gap: 12px;
+  }
+}
+
+@media (max-height: 560px) {
+  .grid {
+    gap: 10px;
   }
 }

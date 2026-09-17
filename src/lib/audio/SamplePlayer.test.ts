@@ -9,15 +9,24 @@ interface FakeSource {
 
 const created: FakeAudioContext[] = [];
 
+/** Stands in for iOS, where resume() stays pending until an accepted gesture. */
+let resumeHangs = false;
+
 class FakeAudioContext {
   state: AudioContextState = "suspended";
   currentTime = 0;
   destination = {};
   sources: FakeSource[] = [];
   gain = { gain: { value: 1, setTargetAtTime: vi.fn() }, connect: vi.fn() };
-  resume = vi.fn(async () => {
+  sampleRate = 44100;
+  resume = vi.fn(() => {
+    if (resumeHangs) return new Promise<void>(() => {});
     this.state = "running";
+    return Promise.resolve();
   });
+  createBuffer = vi.fn(
+    (channels: number, length: number) => ({ numberOfChannels: channels, length }) as AudioBuffer,
+  );
   close = vi.fn(async () => {
     this.state = "closed";
   });
@@ -44,6 +53,7 @@ function respondWith(status: number) {
 
 beforeEach(() => {
   created.length = 0;
+  resumeHangs = false;
   fetchMock.mockReset();
   fetchMock.mockImplementation(async () => respondWith(200));
   vi.stubGlobal("AudioContext", FakeAudioContext);
@@ -100,6 +110,41 @@ describe("SamplePlayer", () => {
 
     const [context] = created;
     expect(context!.gain.gain.setTargetAtTime).toHaveBeenCalledWith(0.2, 0, expect.any(Number));
+  });
+
+  it("nudges the context awake with a silent buffer on unlock", async () => {
+    const player = new SamplePlayer();
+    expect(player.isRunning).toBe(false);
+
+    await player.unlock();
+
+    const [context] = created;
+    expect(context!.createBuffer).toHaveBeenCalledWith(1, 1, 44100);
+    expect(context!.sources).toHaveLength(1);
+    expect(player.isRunning).toBe(true);
+  });
+
+  it("stays locked when the browser does not accept the gesture", () => {
+    resumeHangs = true;
+    const player = new SamplePlayer();
+
+    void player.unlock();
+
+    // Safari can leave resume() pending forever; the caller has to be able to
+    // see that and keep listening for another gesture.
+    expect(player.isRunning).toBe(false);
+  });
+
+  it("drops a hit rather than queueing it while audio is still locked", async () => {
+    resumeHangs = true;
+    const player = new SamplePlayer();
+
+    await player.play("/sounds/a.wav");
+
+    // Awaiting the pending resume() would hold every hit and fire them all at
+    // once whenever audio finally unlocks.
+    const [context] = created;
+    expect(context!.sources).toHaveLength(0);
   });
 
   it("closes the context on dispose and can be used again afterwards", async () => {

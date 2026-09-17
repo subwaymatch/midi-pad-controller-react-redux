@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { DEFAULT_PADS } from "@/data/defaultPads";
 import { STORAGE_KEYS } from "@/lib/storage";
 import { hydrateFromStorage } from "./actions";
+import { editModeExited, editModeToggled } from "./editModeSlice";
 import { editorClosed, editorOpened } from "./editorSlice";
 import { makeStore } from "./index";
 import { padColorChanged, padSampleChanged, padsReset } from "./padsSlice";
@@ -100,5 +101,31 @@ describe("persistence", () => {
 
     expect(store.getState().volume).toBe(0.1);
     expect(store.getState().pads[0]!.color).toBe("magenta");
+  });
+});
+
+describe("editMode", () => {
+  it("starts off and toggles", () => {
+    const store = makeStore();
+    expect(store.getState().editMode).toBe(false);
+
+    store.dispatch(editModeToggled());
+    expect(store.getState().editMode).toBe(true);
+
+    store.dispatch(editModeExited());
+    expect(store.getState().editMode).toBe(false);
+  });
+});
+
+describe("hydrated", () => {
+  it("stays false until the saved state arrives", () => {
+    const store = makeStore();
+    expect(store.getState().hydrated).toBe(false);
+
+    store.dispatch(volumeChanged(0.5));
+    expect(store.getState().hydrated).toBe(false);
+
+    store.dispatch(hydrateFromStorage({ volume: 0.5, pads: [...DEFAULT_PADS] }));
+    expect(store.getState().hydrated).toBe(true);
   });
 });

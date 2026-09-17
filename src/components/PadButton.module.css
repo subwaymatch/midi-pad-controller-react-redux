@@ -1,7 +1,7 @@
 .pad {
   position: relative;
   aspect-ratio: 1;
-  /* --pad is set inline from the pad's color. */
+  /* --pad and --pad-label are set inline from the pad's color. */
   --pad-face: color-mix(in srgb, var(--pad) 35%, white);
   --pad-edge: color-mix(in srgb, var(--pad) 94%, white);
 }
@@ -42,8 +42,9 @@
   left: 14%;
   right: 14%;
   text-align: left;
-  color: #fff;
-  font-size: clamp(10px, 2.6vw, 14px);
+  /* Dark ink: white text clears 4.5:1 on none of the eight pad colors. */
+  color: var(--pad-label);
+  font-size: clamp(12px, 2.6vw, 14px);
   line-height: 1.6;
   white-space: nowrap;
   overflow: hidden;
@@ -51,36 +52,81 @@
   pointer-events: none;
 }
 
+/* Nothing to press on a touch screen, so the key is not worth the width. It
+   stays in the pad's accessible name. */
+@media (hover: none) and (pointer: coarse) {
+  .keyHint {
+    display: none;
+  }
+}
+
 .editButton {
   position: absolute;
-  right: 8px;
-  bottom: 8px;
-  width: 28px;
-  height: 28px;
+  right: 0;
+  bottom: 0;
+  /* 28px of visible dot inside a 44px target (WCAG 2.5.5). */
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
-  border-radius: 50%;
   font-size: 14px;
   color: #fff;
-  background: rgb(0 0 0 / 0.35);
   opacity: 0;
+  /* While invisible it must not swallow hits meant for the pad. */
+  pointer-events: none;
   transition: opacity 0.15s;
+}
+
+.editButton::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 0.35);
+}
+
+.editButton > svg {
+  position: relative;
 }
 
 .pad:hover .editButton,
 .pad:focus-within .editButton {
   opacity: 1;
+  pointer-events: auto;
 }
 
-.editButton:hover {
+.editButton:hover::before {
   background: rgb(0 0 0 / 0.6);
 }
 
-/* No hover on touch screens: keep the affordance visible. */
+/* Touch screens have no hover to reveal it, and sixteen always-on pencils both
+   clutter the instrument and sit right where a thumb lands. The "Edit pads"
+   toggle in the top bar is the way in there. */
 @media (hover: none) {
   .editButton {
-    opacity: 1;
+    display: none;
   }
+}
+
+.editable .editButton {
+  display: none;
+}
+
+.editHint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40%;
+  max-width: 56px;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 18px;
+  color: #fff;
+  background: rgb(0 0 0 / 0.45);
+  pointer-events: none;
 }
 
 .editingBadge {

@@ -2,7 +2,18 @@
   --color-primary: #01c6bd;
   --color-bg: #111;
   --color-text: #fff;
+  /* Width of the pad editor panel. The stage reads it too, so the two stay in
+     step when the panel is resized. */
+  --panel-width: 330px;
   color-scheme: dark;
+}
+
+/* Landscape phones and other short, wide viewports: the panel goes two-column
+   so the sample list is not squeezed into a couple of rows. */
+@media (max-height: 560px) and (min-width: 560px) {
+  :root {
+    --panel-width: min(480px, 100vw);
+  }
 }
 
 *,
@@ -20,7 +31,9 @@ html {
 body {
   min-height: 100%;
   color: var(--color-text);
-  background: var(--color-bg) linear-gradient(140deg, #222 0%, #000 90%);
+  /* Flat colour only. The app's own gradient is painted by the layout, which
+     is exactly one viewport tall, so it cannot tile into a visible seam. */
+  background: var(--color-bg);
   font-family: var(--font-roboto), Roboto, system-ui, sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -32,6 +45,16 @@ button {
   background: none;
   border: 0;
   cursor: pointer;
+}
+
+/* The pad editor is a <dialog>; strip the dimensions and chrome the UA gives
+   it so its own styles are free to place it. */
+dialog {
+  max-width: none;
+  max-height: none;
+  color: inherit;
+  background: none;
+  border: 0;
 }
 
 ul {

@@ -1,14 +1,49 @@
 .app {
   display: flex;
-  min-height: 100dvh;
+  flex-direction: column;
+  height: 100dvh;
+  /* The gradient lives here rather than on <body>: a background on the body
+     propagates to the canvas and repeats every viewport height, which shows up
+     as a hard seam the moment the page scrolls. */
+  background: linear-gradient(140deg, #222 0%, #000 90%);
+}
+
+.main {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  transition: padding-right 0.25s ease-out;
+}
+
+/* Between 900px and 1300px the open panel would reach the centered grid, so
+   the stage gives way to it. The transition keeps the pads from jumping. */
+@media (min-width: 900px) {
+  .main[data-editing="true"] {
+    padding-right: var(--panel-width);
+  }
+}
+
+@media (min-width: 1300px) {
+  .main[data-editing="true"] {
+    padding-right: 0;
+  }
 }
 
 .stage {
-  position: relative;
-  flex: 1 1 auto;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 96px 16px 32px;
+  flex: 1 1 0;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  padding: 8px 16px 32px;
+  /* Size container: lets the grid measure itself against the space actually
+     left over, so all 16 pads stay on screen on a landscape phone or in a
+     short desktop window instead of running off the bottom. */
+  container-type: size;
+}
+
+@media (max-height: 560px) {
+  .stage {
+    padding: 4px 12px 12px;
+  }
 }

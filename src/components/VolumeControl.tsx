@@ -1,6 +1,6 @@
 "use client";
 
-import type { CSSProperties } from "react";
+import { useRef, type CSSProperties } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { volumeChanged } from "@/store/volumeSlice";
 import { Icon, type IconName } from "./Icon";
@@ -13,14 +13,38 @@ function volumeIcon(volume: number): IconName {
   return "volume-high";
 }
 
+/** Used when unmuting if the volume was already at zero when the page opened. */
+const FALLBACK_VOLUME = 0.8;
+
 export function VolumeControl() {
   const volume = useAppSelector((state) => state.volume);
   const dispatch = useAppDispatch();
   const percent = Math.round(volume * 100);
+  // The icon looks like a mute toggle, so it is one; this is where it goes
+  // back to.
+  const beforeMute = useRef(volume);
+
+  const toggleMute = () => {
+    if (volume > 0) {
+      beforeMute.current = volume;
+      dispatch(volumeChanged(0));
+    } else {
+      dispatch(volumeChanged(beforeMute.current || FALLBACK_VOLUME));
+    }
+  };
 
   return (
     <div className={styles.volume}>
-      <Icon name={volumeIcon(volume)} className={styles.icon} />
+      <button
+        type="button"
+        className={styles.mute}
+        aria-label="Mute"
+        aria-pressed={volume === 0}
+        title={volume === 0 ? "Unmute" : "Mute"}
+        onClick={toggleMute}
+      >
+        <Icon name={volumeIcon(volume)} />
+      </button>
       <input
         type="range"
         className={styles.slider}
