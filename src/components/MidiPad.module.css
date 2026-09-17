@@ -13,20 +13,28 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
-  transition: padding-right 0.25s ease-out;
+  /* The column an open panel takes along the right edge, kept clear by the top
+     bar and by the pad grid respectively. Both are 0 while the panel is closed
+     and while it covers the pads rather than sitting beside them.
+     `MidiControls.module.css` reads the first one. */
+  --panel-gutter: 0px;
+  --stage-gutter: 0px;
 }
 
-/* Between 900px and 1300px the open panel would reach the centered grid, so
-   the stage gives way to it. The transition keeps the pads from jumping. */
 @media (min-width: 900px) {
   .main[data-editing="true"] {
-    padding-right: var(--panel-width);
+    --panel-gutter: var(--panel-width);
+    --stage-gutter: var(--panel-width);
   }
 }
 
+/* Past 1300px the centered grid never reaches the panel, so the pads keep the
+   whole stage. The top bar still gives way: its controls sit against the right
+   edge, which is exactly where the panel is, and the panel is transparent
+   beside the pads, so they would show through it. */
 @media (min-width: 1300px) {
   .main[data-editing="true"] {
-    padding-right: 0;
+    --stage-gutter: 0px;
   }
 }
 
@@ -36,6 +44,9 @@
   display: grid;
   place-items: center;
   padding: 8px 16px 32px;
+  padding-right: calc(16px + var(--stage-gutter));
+  /* Keeps the pads from jumping sideways as the panel opens and closes. */
+  transition: padding-right 0.25s ease-out;
   /* Size container: lets the grid measure itself against the space actually
      left over, so all 16 pads stay on screen on a landscape phone or in a
      short desktop window instead of running off the bottom. */
@@ -45,5 +56,6 @@
 @media (max-height: 560px) {
   .stage {
     padding: 4px 12px 12px;
+    padding-right: calc(12px + var(--stage-gutter));
   }
 }

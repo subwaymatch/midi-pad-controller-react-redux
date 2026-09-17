@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, type MouseEvent } from "react";
 import { useSamplePlayer } from "@/hooks/useSamplePlayer";
 import { useAppSelector } from "@/store/hooks";
 import { MidiControls } from "./MidiControls";
@@ -21,6 +21,22 @@ const UNLOCK_EVENTS = [
   "click",
   "keydown",
 ] as const;
+
+/**
+ * Stops a pointer press from leaving focus on the button it hit.
+ *
+ * The keyboard is this app's instrument, not a way to move around it, and the
+ * browser cannot tell the two apart: the first note played flips it into
+ * keyboard mode, and `:focus-visible` then rings whatever the mouse last
+ * clicked — a pad, its pencil, the Edit pads toggle — none of which is where
+ * the keys are going. Declining the focus keeps the ring where it earns its
+ * place: on a control reached by Tab, the only way to see where you are.
+ * Inputs keep theirs, since a slider or a swatch has to hold focus to be
+ * driven from the keyboard at all.
+ */
+export function keepFocusOffPressedButtons(event: MouseEvent<HTMLDivElement>) {
+  if ((event.target as Element).closest("button")) event.preventDefault();
+}
 
 export function MidiPad() {
   const volume = useAppSelector((state) => state.volume);
@@ -50,11 +66,12 @@ export function MidiPad() {
   }, [player]);
 
   return (
-    <div className={styles.app}>
+    <div className={styles.app} onMouseDown={keepFocusOffPressedButtons}>
       {/* Reserving the panel's column only once it is open would shove the
           pads sideways, so the panel floats and the stage is padded with a
-          transition. Above 1300px the centered grid never reaches it and no
-          padding is needed at all. */}
+          transition. Above 1300px the centered grid never reaches it and the
+          stage keeps its padding, but the top bar gives way at every width:
+          its controls sit against the right edge, under the panel. */}
       <main className={styles.main} data-editing={editor !== null}>
         <h1 className="visually-hidden">MIDI Pad Controller</h1>
         <MidiControls />

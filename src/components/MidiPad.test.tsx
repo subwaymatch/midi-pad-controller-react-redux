@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { beforeEach, describe, expect, it } from "vitest";
 import { makeStore } from "@/store";
 import { setMediaQueryMatcher } from "@/test/browser";
-import { MidiPad } from "./MidiPad";
+import { keepFocusOffPressedButtons, MidiPad } from "./MidiPad";
 
 function renderApp() {
   const store = makeStore();
@@ -94,5 +94,40 @@ describe("MidiPad", () => {
 
     expect(store.getState().pads[15]!.color).toBe("turquoise");
     expect(store.getState().editor).toBeNull();
+  });
+});
+
+/** `fireEvent` reports a dispatch as false once preventDefault has been called. */
+function pressedWithoutTakingFocus(element: Element): boolean {
+  return !fireEvent.mouseDown(element);
+}
+
+describe("keepFocusOffPressedButtons", () => {
+  function renderControls() {
+    render(
+      <div onMouseDown={keepFocusOffPressedButtons}>
+        <button type="button">
+          Pad <span data-testid="inside">1</span>
+        </button>
+        <input type="range" aria-label="Volume" />
+      </div>,
+    );
+  }
+
+  it("declines the focus a press would otherwise leave on a button", () => {
+    renderControls();
+    expect(pressedWithoutTakingFocus(screen.getByRole("button"))).toBe(true);
+  });
+
+  it("covers what is drawn inside the button too", () => {
+    renderControls();
+    // Presses land on the icons and labels inside a control, not on the
+    // button itself.
+    expect(pressedWithoutTakingFocus(screen.getByTestId("inside"))).toBe(true);
+  });
+
+  it("leaves inputs alone, which need focus to be worked from the keyboard", () => {
+    renderControls();
+    expect(pressedWithoutTakingFocus(screen.getByRole("slider"))).toBe(false);
   });
 });
