@@ -1,0 +1,12 @@
+// Cloudflare Workers configuration: serves the static export in ./out.
+// `npm run deploy` builds the site and uploads it with Wrangler.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "midi-pad-controller",
+  "compatibility_date": "2026-09-16",
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}

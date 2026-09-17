@@ -1,0 +1,14 @@
+.app {
+  display: flex;
+  min-height: 100dvh;
+}
+
+.stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 96px 16px 32px;
+}

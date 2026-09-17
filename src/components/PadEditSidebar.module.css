@@ -1,0 +1,130 @@
+.sidebar {
+  position: sticky;
+  top: 0;
+  flex: none;
+  width: 330px;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: 25px 10px 25px 20px;
+  color: #fff;
+  outline: none;
+  animation: sidebar-in 0.3s ease-out;
+}
+
+@keyframes sidebar-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+
+/* Narrow screens: slide over the pads instead of squeezing them. */
+@media (max-width: 899px) {
+  .sidebar {
+    position: fixed;
+    inset: 0 0 0 auto;
+    z-index: 10;
+    width: min(330px, 100vw);
+    background: rgb(10 10 10 / 0.98);
+    box-shadow: -10px 0 30px rgb(0 0 0 / 0.5);
+  }
+}
+
+.heading {
+  margin-bottom: 20px;
+  padding-right: 20px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.samples {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  padding-right: 20px;
+}
+
+.sectionTitle h3 {
+  flex: 1 1 auto;
+  font-size: 15px;
+  font-weight: 500;
+  color: #777;
+}
+
+.colorName {
+  font-size: 14px;
+  color: #999;
+}
+
+.revert {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.revert:hover {
+  color: var(--color-primary);
+}
+
+.sampleList {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #888 transparent;
+}
+
+.sampleItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 5px 0;
+  font-size: 15px;
+  text-align: left;
+  color: #999;
+}
+
+.sampleItem:hover {
+  color: #fff;
+}
+
+.selected {
+  color: #fff;
+  font-weight: 500;
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-right: 20px;
+  padding: 15px;
+  border-radius: 40px;
+  font-size: 16px;
+  color: #222;
+  background: #eee;
+}
+
+.closeButton:hover {
+  color: #444;
+  background: #fff;
+}
