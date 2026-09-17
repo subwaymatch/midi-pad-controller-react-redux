@@ -12,6 +12,7 @@
     "preview": "next build && wrangler dev",
     "deploy": "next build && wrangler deploy",
     "lint": "eslint .",
+    "icons": "node scripts/make-icons.mjs public",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",

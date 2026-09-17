@@ -37,14 +37,58 @@ describe("usePadShortcuts", () => {
   it("leaves keystrokes aimed at text fields alone", () => {
     const onTrigger = vi.fn();
     renderHook(() => usePadShortcuts(DEFAULT_PADS, onTrigger));
-    const input = document.createElement("input");
-    document.body.append(input);
 
-    const event = press("q", {}, input);
+    for (const type of ["text", "search", "password", "number", "date"]) {
+      const input = document.createElement("input");
+      input.type = type;
+      document.body.append(input);
 
-    expect(onTrigger).not.toHaveBeenCalled();
-    expect(event.defaultPrevented).toBe(false);
-    input.remove();
+      const event = press("q", {}, input);
+
+      expect(onTrigger).not.toHaveBeenCalled();
+      expect(event.defaultPrevented).toBe(false);
+      input.remove();
+    }
+  });
+
+  it("still fires while a slider or a swatch has focus", () => {
+    const onTrigger = vi.fn();
+    renderHook(() => usePadShortcuts(DEFAULT_PADS, onTrigger));
+
+    for (const type of ["range", "radio", "checkbox", "button"]) {
+      const input = document.createElement("input");
+      input.type = type;
+      document.body.append(input);
+
+      const event = press("q", {}, input);
+
+      expect(event.defaultPrevented).toBe(true);
+      input.remove();
+    }
+
+    expect(onTrigger).toHaveBeenCalledTimes(4);
+    expect(onTrigger).toHaveBeenCalledWith(4);
+  });
+
+  it("falls back to the physical key on layouts without Latin characters", () => {
+    const onTrigger = vi.fn();
+    renderHook(() => usePadShortcuts(DEFAULT_PADS, onTrigger));
+
+    press("\u0439", { code: "KeyQ" });
+    press("\u0444", { code: "KeyA" });
+
+    expect(onTrigger).toHaveBeenNthCalledWith(1, 4);
+    expect(onTrigger).toHaveBeenNthCalledWith(2, 8);
+  });
+
+  it("prefers the typed character over the physical key", () => {
+    const onTrigger = vi.fn();
+    renderHook(() => usePadShortcuts(DEFAULT_PADS, onTrigger));
+
+    // AZERTY: the key at the QWERTY "Q" position types an "a".
+    press("a", { code: "KeyQ" });
+
+    expect(onTrigger).toHaveBeenCalledExactlyOnceWith(8);
   });
 
   it("stops listening once unmounted", () => {

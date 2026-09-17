@@ -1,35 +1,76 @@
 .volume {
   display: flex;
   align-items: center;
-  gap: 14px;
-  width: 190px;
-  max-width: 50%;
+  gap: 6px;
+  width: 215px;
+  max-width: 45%;
 }
 
-.icon {
+.mute {
   flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   font-size: 24px;
+  color: #fff;
+}
+
+.mute:hover,
+.mute[aria-pressed="true"] {
+  color: var(--color-primary);
 }
 
 .slider {
   appearance: none;
   -webkit-appearance: none;
-  width: 100%;
-  height: 4px;
+  flex: 1 1 auto;
+  min-width: 0;
+  /* A 4px line is a 4px target. The drawn track stays 4px, but the box the
+     finger has to land on is the full 44px. */
+  height: 44px;
   margin: 0;
+  background: none;
+  outline-offset: -14px;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-runnable-track {
+  height: 4px;
   border-radius: 2px;
   background: linear-gradient(
     to right,
     var(--color-primary) var(--fill),
     #333 var(--fill)
   );
-  outline-offset: 8px;
-  cursor: pointer;
+}
+
+.slider::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    var(--color-primary) var(--fill),
+    #333 var(--fill)
+  );
 }
 
 .slider::-webkit-slider-thumb {
   appearance: none;
   -webkit-appearance: none;
+  box-sizing: border-box;
+  width: 14px;
+  height: 14px;
+  /* Centres the thumb on the 4px track. */
+  margin-top: -5px;
+  border-radius: 50%;
+  background: #111;
+  border: 2px solid var(--color-primary);
+}
+
+.slider::-moz-range-thumb {
+  box-sizing: border-box;
   width: 14px;
   height: 14px;
   border-radius: 50%;
@@ -37,12 +78,18 @@
   border: 2px solid var(--color-primary);
 }
 
-.slider::-moz-range-thumb {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #111;
-  border: 2px solid var(--color-primary);
+/* Fingers need something bigger to grab than a mouse pointer does. */
+@media (pointer: coarse) {
+  .slider::-webkit-slider-thumb {
+    width: 22px;
+    height: 22px;
+    margin-top: -9px;
+  }
+
+  .slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+  }
 }
 
 .slider:hover::-webkit-slider-thumb {

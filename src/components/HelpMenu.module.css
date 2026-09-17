@@ -62,3 +62,38 @@
 .action strong {
   font-weight: 500;
 }
+
+.danger {
+  margin-top: 18px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 15px;
+  color: #111;
+  background: #f0f0f0;
+}
+
+.danger:hover {
+  background: #fff;
+}
+
+.confirmActions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Copy that only makes sense with a pointer, and the touch wording that
+   replaces it. `section.pointerOnly` needs `display: block` when shown. */
+.touchOnly {
+  display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .pointerOnly {
+    display: none;
+  }
+
+  .touchOnly {
+    display: block;
+  }
+}

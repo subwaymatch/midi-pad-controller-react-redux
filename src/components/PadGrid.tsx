@@ -15,6 +15,8 @@ const KEY_FLASH_MS = 120;
 export function PadGrid({ player }: { player: SamplePlayer }) {
   const pads = useAppSelector((state) => state.pads);
   const editingIndex = useAppSelector((state) => state.editor?.padIndex ?? null);
+  const editMode = useAppSelector((state) => state.editMode);
+  const hydrated = useAppSelector((state) => state.hydrated);
   const dispatch = useAppDispatch();
 
   // Pads hit from the keyboard light up briefly, mirroring the :active state
@@ -22,11 +24,31 @@ export function PadGrid({ player }: { player: SamplePlayer }) {
   const [litPads, setLitPads] = useState<ReadonlySet<number>>(() => new Set());
   const flashTimers = useRef(new Map<number, ReturnType<typeof setTimeout>>());
 
+  // Held so focus can go back to the edit button once the editor closes.
+  const editButtons = useRef(new Map<number, HTMLButtonElement>());
+  const previousEditing = useRef<number | null>(null);
+
   useEffect(() => {
+    // Preloading the default layout before the saved one has been read would
+    // fetch a sample for every pad the user has since changed, and throw it
+    // away a tick later.
+    if (!hydrated) return;
     for (const pad of pads) {
       player.preload(sampleUrl(pad.srcName));
     }
-  }, [pads, player]);
+  }, [pads, player, hydrated]);
+
+  useEffect(() => {
+    const closed = previousEditing.current;
+    previousEditing.current = editingIndex;
+    if (editingIndex !== null || closed === null) return;
+    // Only when the editor left focus stranded on the body. Closing as a side
+    // effect of something else, a reset from the help panel say, must not pull
+    // focus away from whatever the user is actually using.
+    const active = document.activeElement;
+    if (active && active !== document.body) return;
+    editButtons.current.get(closed)?.focus();
+  }, [editingIndex]);
 
   useEffect(() => {
     const timers = flashTimers.current;
@@ -94,8 +116,13 @@ export function PadGrid({ player }: { player: SamplePlayer }) {
           pad={pad}
           isLit={litPads.has(index)}
           isEditing={editingIndex === index}
+          editMode={editMode}
           onPlay={() => play(index)}
           onEdit={() => openEditor(index)}
+          editButtonRef={(element) => {
+            if (element) editButtons.current.set(index, element);
+            else editButtons.current.delete(index);
+          }}
         />
       ))}
     </div>

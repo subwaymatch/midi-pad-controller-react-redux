@@ -4,11 +4,13 @@ import {
   createListenerMiddleware,
 } from "@reduxjs/toolkit";
 import { savePads, saveVolume } from "@/lib/storage";
+import editMode from "./editModeSlice";
 import editor from "./editorSlice";
+import hydrated from "./hydratedSlice";
 import pads from "./padsSlice";
 import volume from "./volumeSlice";
 
-const rootReducer = combineReducers({ pads, volume, editor });
+const rootReducer = combineReducers({ pads, volume, editor, editMode, hydrated });
 
 export type RootState = ReturnType<typeof rootReducer>;
 
