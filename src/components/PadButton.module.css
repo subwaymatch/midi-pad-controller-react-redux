@@ -1,7 +1,7 @@
 .pad {
   position: relative;
   aspect-ratio: 1;
-  /* --pad and --pad-label are set inline from the pad's color. */
+  /* --pad is set inline from the pad's color. */
   --pad-face: color-mix(in srgb, var(--pad) 35%, white);
   --pad-edge: color-mix(in srgb, var(--pad) 94%, white);
 }
@@ -42,8 +42,10 @@
   left: 14%;
   right: 14%;
   text-align: left;
-  /* Dark ink: white text clears 4.5:1 on none of the eight pad colors. */
-  color: var(--pad-label);
+  color: #fff;
+  /* White ink is thin on the lighter pad colors, so the shadow does the
+     separating rather than a darker text color. */
+  text-shadow: 0 1px 2px rgb(0 0 0 / 0.55);
   font-size: clamp(12px, 2.6vw, 14px);
   line-height: 1.6;
   white-space: nowrap;

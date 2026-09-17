@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties, MouseEvent, PointerEvent, Ref } from "react";
-import { padColorHex, padLabelHex } from "@/lib/colors";
+import { padColorHex } from "@/lib/colors";
 import { cx } from "@/lib/cx";
 import type { Pad } from "@/lib/pads";
 import { shortSampleName } from "@/lib/samples";
@@ -60,7 +60,6 @@ export function PadButton({
       style={
         {
           "--pad": padColorHex(pad.color),
-          "--pad-label": padLabelHex(pad.color),
         } as CSSProperties
       }
       data-color={pad.color}
